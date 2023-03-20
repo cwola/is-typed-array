@@ -108,7 +108,9 @@ function isTypedArray(val) {
     );
 }
 
-module.exports = {
+export default isTypedArray;
+export {
+    isTypedArray,
     isInt8Array,
     isUint8Array,
     isUint8ClampedArray,
@@ -120,5 +122,4 @@ module.exports = {
     isFloat64Array,
     isBigInt64Array,
     isBigUint64Array,
-    isTypedArray,
 };

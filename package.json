@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Find whether the type of a variable is typed array.",
   "main": "src/isTypedArray.js",
+  "type": "module",
   "scripts": {
     "lint": "eslint --ext js --quiet ./src/",
     "test": "node ./test/test.js"
@@ -12,6 +13,7 @@
     "cwola",
     "typed",
     "array",
+    "typed-array",
     "util",
     "is"
   ],
