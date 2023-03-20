@@ -23,8 +23,8 @@
     "url": "git+https://github.com/cwola/is-typed-array.git"
   },
   "exports": {
-    "import": "./lib/isTypedArray.mjs",
-    "require": "./lib/isTypedArray.cjs"
+    "import": "./src/isTypedArray.mjs",
+    "require": "./src/isTypedArray.cjs"
   },
   "dependencies": {},
   "devDependencies": {
