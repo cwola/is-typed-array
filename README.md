@@ -8,9 +8,37 @@ Find whether the type of a variable is typed array.
 $ npm i --save @cwola/is-typed-array
 ```
 
+## require / import
+
+- esm
+
+    import default(== isTypedArray).
+
+    ```
+    import isTypedArray from '@cwola/is-typed-array';
+    ```
+
+    otherwise.
+
+    ```
+    import {
+        isTypedArray,
+        isInt8Array
+    } from '@cwola/is-typed-array';
+    ```
+
+- commonjs
+
+    ```
+    const m = require('@cwola/is-typed-array');
+    const isTypedArray = m.isTypedArray;
+    const isInt8Array = m.isInt8Array
+    ```
+
 ## Test
 
 ```
+// esm
 import {
     isTypedArray,
     isInt8Array,

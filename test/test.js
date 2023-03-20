@@ -1,5 +1,5 @@
 
-
+// esm
 import {
     isTypedArray,
     isInt8Array,
@@ -13,8 +13,25 @@ import {
     isFloat64Array,
     isBigInt64Array,
     isBigUint64Array
-} from '../src/isTypedArray.js';
+} from '../src/isTypedArray.mjs';
 import assert from 'assert';
+// commonjs
+/**
+const m = require('../src/isTypedArray.cjs');
+const isTypedArray = m.isTypedArray;
+const isInt8Array = m.isInt8Array;
+const isUint8Array = m.isUint8Array;
+const isUint8ClampedArray = m.isUint8ClampedArray;
+const isInt16Array = m.isInt16Array;
+const isUint16Array = m.isUint16Array;
+const isInt32Array = m.isInt32Array;
+const isUint32Array = m.isUint32Array;
+const isFloat32Array = m.isFloat32Array;
+const isFloat64Array = m.isFloat64Array;
+const isBigInt64Array = m.isBigInt64Array;
+const isBigUint64Array = m.isBigUint64Array;
+const assert = require('assert');
+ */
 
 assert.equal(false, isTypedArray(undefined));
 assert.equal(false, isTypedArray(null));
