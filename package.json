@@ -1,6 +1,6 @@
 {
   "name": "@cwola/is-typed-array",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Find whether the type of a variable is typed array.",
   "main": "src/isTypedArray.js",
   "type": "module",
