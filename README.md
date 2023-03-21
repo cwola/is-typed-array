@@ -1,512 +1,132 @@
-# storage-wrapper
+# is-typed-array
 
-Providing storage wrapper for JS.
-
-## Overview
-
-Providing storage wrapper for JS.
-
-sessionStorage, localStorage and array can be used.
+Find whether the type of a variable is typed array.
 
 ## Installation
 
 ```
-$ npm i --save @cwola/storage-wrapper
+$ npm i --save @cwola/is-typed-array
 ```
 
-## Usage
+## require / import
+
+- esm
+
+    import default(== isTypedArray).
+
+    ```
+    import isTypedArray from '@cwola/is-typed-array';
+    ```
+
+    otherwise.
+
+    ```
+    import {
+        isTypedArray,
+        isInt8Array
+    } from '@cwola/is-typed-array';
+    ```
+
+- commonjs
+
+    ```
+    const m = require('@cwola/is-typed-array');
+    const isTypedArray = m.isTypedArray;
+    const isInt8Array = m.isInt8Array
+    ```
+
+## Test
 
 ```
+// esm
 import {
-    Stack,
-    ROTATE
-} from '@cwola/limited-size-stack';
+    isTypedArray,
+    isInt8Array,
+    isUint8Array,
+    isUint8ClampedArray,
+    isInt16Array,
+    isUint16Array,
+    isInt32Array,
+    isUint32Array,
+    isFloat32Array,
+    isFloat64Array,
+    isBigInt64Array,
+    isBigUint64Array
+} from '@cwola/is-typed-array';
+import assert from 'assert';
 
-const STACK = new Stack(/* capacity = */ 5);
+assert.equal(false, isTypedArray(undefined));
+assert.equal(false, isTypedArray(null));
+assert.equal(false, isTypedArray(false));
+assert.equal(false, isTypedArray(true));
+assert.equal(false, isTypedArray([]));
+assert.equal(false, isTypedArray({}));
+assert.equal(false, isTypedArray(/a/g));
+assert.equal(false, isTypedArray(new RegExp('a', 'g')));
+assert.equal(false, isTypedArray(new Date()));
+assert.equal(false, isTypedArray(42));
+assert.equal(false, isTypedArray(NaN));
+assert.equal(false, isTypedArray(Infinity));
+assert.equal(false, isTypedArray(new Number(42)));
+assert.equal(false, isTypedArray('foo'));
+assert.equal(false, isTypedArray(Object('foo')));
+assert.equal(false, isTypedArray(function () {}));
+assert.equal(false, isTypedArray(function* () {}));
+assert.equal(false, isTypedArray(x => x * x));
+assert.equal(false, isTypedArray([]));
 
-STACK.push('one', 'two', 'three', 'four', 'five');
-// STACK : ['one', 'two', 'three', 'four', 'five']
+assert.ok(isInt8Array(new Int8Array()));
+assert.ok(isUint8Array(new Uint8Array()));
+assert.ok(isUint8ClampedArray(new Uint8ClampedArray()));
+assert.ok(isInt16Array(new Int16Array()));
+assert.ok(isUint16Array(new Uint16Array()));
+assert.ok(isInt32Array(new Int32Array()));
+assert.ok(isUint32Array(new Uint32Array()));
+assert.ok(isFloat32Array(new Float32Array()));
+assert.ok(isFloat64Array(new Float64Array()));
+assert.ok(isBigInt64Array(new BigInt64Array()));
+assert.ok(isBigUint64Array(new BigUint64Array()));
 
-STACK.push('six');
-// STACK : ['two', 'three', 'four', 'five', 'six']
-
-console.log(STACK.top());
-// output : 'six'
-
-STACK.rotate(ROTATE.RIGHT);
-// STACK : ['six', 'two', 'three', 'four', 'five']
-
-STACK.dup();
-// STACK : ['two', 'three', 'four', 'five', 'five']
+assert.ok(isTypedArray(new Int8Array()));
+assert.ok(isTypedArray(new Uint8Array()));
+assert.ok(isTypedArray(new Uint8ClampedArray()));
+assert.ok(isTypedArray(new Int16Array()));
+assert.ok(isTypedArray(new Uint16Array()));
+assert.ok(isTypedArray(new Int32Array()));
+assert.ok(isTypedArray(new Uint32Array()));
+assert.ok(isTypedArray(new Float32Array()));
+assert.ok(isTypedArray(new Float64Array()));
+assert.ok(isTypedArray(new BigInt64Array()));
+assert.ok(isTypedArray(new BigUint64Array()));
 ```
 
 ## Method
 
-- **constructor**
-  ***
-  - Description
+- **isTypedArray**
 
-    Constructor
+- **isInt8Array**
 
-  - Arguments
+- **isUint8Array**
 
-    | Name | Type | Description |
-    |---|:---:|---|
-    | capacity | number | The maximum capacity of the stack.<br>If you specify a negative number, the capacity is unlimited. |
+- **isUint8ClampedArray**
 
-  - Return
+- **isInt16Array**
 
-    | Type | Description |
-    |:---:|---|
-    | Stack | Stack instance. |
+- **isUint16Array**
 
-- **push**
-  ***
-  - Description
+- **isInt32Array**
 
-    Push one or more elements onto the end of stack, removing the oldest element if the stack is full.
+- **isUint32Array**
 
-  - Arguments
+- **isFloat32Array**
 
-    | Name | Type | Description |
-    |---|:---:|---|
-    | ...elements | any[] | input elements. |
+- **isFloat64Array**
 
-  - Return
+- **isBigInt64Array**
 
-    | Type | Description |
-    |:---:|---|
-    | number | The new number of elements in the stack. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-
-    stack.push('one', 'two');  // returns 2
-    // stack : ['one', 'two']
-
-    stack.push('three');  // returns 3
-    // stack : ['one', 'two', 'three']
-
-    stack.push('four');  // returns 3
-    // stack : ['two', 'three', 'four']
-    ```
-
-- **pop**
-  ***
-  - Description
-
-    Pop the element off the end of stack.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any | Returns the last element of stack.<br>If stack is empty, 'undefined' will be returned. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    tack.pop();  // returns 'three'
-    // stack : ['one', 'two']
-    ```
-
-- **shift**
-  ***
-  - Description
-
-    Shift an element off the beginning of stack.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any | Returns the shifted element.<br>If stack is empty, 'undefined' will be returned. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.shift();  // returns 'one'
-    // stack : ['two', 'three']
-    ```
-
-- **top**
-  ***
-  - Description
-
-    Returns the last element of stack.<br>
-    <br>
-    The topmost element is returned, but the stack size does not change<br>
-    (meaning the element remains on the stack).
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any | Returns the last element of stack.<br>If stack is empty, 'undefined' will be returned. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.top();  // returns 'three'
-    // stack : ['one', 'two', 'three']
-    ```
-
-- **bottom**
-  ***
-  - Description
-
-    Returns the first element of stack.<br>
-    <br>
-    The bottom element is returned, but the stack size does not change<br>
-    (meaning the element remains on the stack).
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any | Returns the first element of stack.<br>If stack is empty, 'undefined' will be returned. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.bottom();  // returns 'one'
-    // stack : ['one', 'two', 'three']
-    ```
-
-- **at**
-  ***
-  - Description
-
-    Takes an integer value and returns the element at that index.<br>
-    <br>
-    Supports relative indexing from the end of the stack when passed a negative index.<br>
-    i.e. if a negative number is used, the element returned will be found by counting back<br>
-    from the end of the stack.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-    | index | number | The index (position) of the stack element to be returned. |
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any | Returns the element in the stack matching the given index.<br>If stack is empty or index is out of bounds, 'undefined' will be returned. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.at(1);  // returns 'two'
-    // stack : ['one', 'two', 'three']
-
-    stack.at(-1);  // returns 'three'
-    // stack : ['one', 'two', 'three']
-    ```
-
-- **dup**
-  ***
-  - Description
-
-    The top element is popped, and then pushed again (twice).<br>
-    so that an additional copy of the former top element is now on top, with the original below it.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any | Returns the last element of stack.<br>If stack is empty, 'undefined' will be returned. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.dup();  // returns 'three'
-    // stack : ['two', 'three', 'three']
-    ```
-
-- **swap**
-  ***
-  - Description
-
-    Swap the two positions of the topmost elements on the stack.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any | Returns the last element of stack.<br>If stack is empty, 'undefined' will be returned. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.swap();  // returns 'two'
-    // stack : ['one', 'three', 'two']
-    ```
-
-- **rotate**
-  ***
-  - Description
-
-    Rotate the topmost n items to move on the stack.<br>
-    <br>
-    The n topmost items are moved on the stack in a rotating fashion.<br>
-    'n' is the number of elements to rotate (but if you specify '0' or negative number, the target will be all elements).<br>
-    so, if you specify '2', it becomes 'swap'.<br>
-    <br>
-    Two variants of this operation are possible, left rotate and right rotate.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-    | direction | ROTATE | ROTATE.RIGHT or ROTATE.LEFT |
-    | n | number | number of elements to rotate<br>[optional] default : 0 |
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any | Returns the last element of stack.<br>If stack is empty, 'undefined' will be returned. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.rotate(ROTATE.RIGHT);  // returns 'two'
-    // stack : ['three', 'one', 'two']
-
-    stack.rotate(ROTATE.LEFT);  // returns 'three'
-    // stack : ['one', 'two', 'three']
-    ```
-
-- **reverse**
-  ***
-  - Description
-
-    Reverse the order of the elements on stack.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any | Returns the last element of stack.<br>If stack is empty, 'undefined' will be returned. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.reverse();  // returns 'one'
-    // stack : ['three', 'two', 'one']
-    ```
-
-- **size**
-  ***
-  - Description
-
-    Get number of elements.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | number | Number of elements. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.size();  // returns 3
-    // stack : ['one', 'two', 'three']
-    ```
-
-- **isEmpty**
-  ***
-  - Description
-
-    Returns True if the stack is empty, false otherwise.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | Boolean | Returns True if the stack is empty, false otherwise. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.isEmpty();  // returns False
-    // stack : ['one', 'two', 'three']
-
-    stack.clear();
-    stack.isEmpty;  // returns True
-    // stack : []
-    ```
-
-- **clear**
-  ***
-  - Description
-
-    Clear all elements.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | this | this. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    stack.clear();  // returns stack
-    // stack : []
-    ```
-
-- **clone**
-  ***
-  - Description
-
-    Clone this stack.<br>
-    <br>
-    The stack property is shallow-copied.
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | Stack | new Stack instance. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    const copied = stack.clone();
-    stack.push('four');
-    // stack : ['two', 'three', 'four']
-    // copied : ['one', 'two', 'three']
-    ```
-
-- **toArray**
-  ***
-  - Description
-
-    To array (shallow-copied).
-
-  - Arguments
-
-    | Name | Type | Description |
-    |---|:---:|---|
-
-  - Return
-
-    | Type | Description |
-    |:---:|---|
-    | any[] | array. |
-
-  - example
-    ```
-    const stack = new Stack(3);
-    stack.push('one', 'two', 'three');
-    // stack : ['one', 'two', 'three']
-
-    const arr = stack.toArray();
-    stack.push('four');
-    // stack : ['two', 'three', 'four']
-    // arr : ['one', 'two', 'three']
-    ```
+- **isBigUint64Array**
 
 
 ## License
 
-[MIT](https://github.com/cwola/limited-size-stack/blob/main/LICENSE)
+[MIT](https://github.com/cwola/is-typed-array/blob/develop/LICENSE)

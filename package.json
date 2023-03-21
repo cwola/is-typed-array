@@ -1,10 +1,11 @@
 {
   "name": "@cwola/is-typed-array",
-  "version": "0.0.1",
+  "version": "1.1.1",
   "description": "Find whether the type of a variable is typed array.",
-  "main": "src/isTypedArray.js",
+  "main": "src/isTypedArray",
+  "type": "module",
   "scripts": {
-    "lint": "eslint --ext js --quiet ./src/",
+    "lint": "eslint --ext js --quiet ./src/*",
     "test": "node ./test/test.js"
   },
   "author": "r-jimbo",
@@ -12,6 +13,7 @@
     "cwola",
     "typed",
     "array",
+    "typed-array",
     "util",
     "is"
   ],
@@ -19,6 +21,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cwola/is-typed-array.git"
+  },
+  "exports": {
+    "import": "./src/isTypedArray.mjs",
+    "require": "./src/isTypedArray.cjs"
   },
   "dependencies": {},
   "devDependencies": {

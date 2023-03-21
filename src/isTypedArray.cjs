@@ -108,17 +108,15 @@ function isTypedArray(val) {
     );
 }
 
-module.exports = {
-    isInt8Array,
-    isUint8Array,
-    isUint8ClampedArray,
-    isInt16Array,
-    isUint16Array,
-    isInt32Array,
-    isUint32Array,
-    isFloat32Array,
-    isFloat64Array,
-    isBigInt64Array,
-    isBigUint64Array,
-    isTypedArray,
-};
+module.exports.isTypedArray = isTypedArray;
+module.exports.isInt8Array = isInt8Array;
+module.exports.isUint8Array = isUint8Array;
+module.exports.isUint8ClampedArray = isUint8ClampedArray;
+module.exports.isInt16Array = isInt16Array;
+module.exports.isUint16Array = isUint16Array;
+module.exports.isInt32Array = isInt32Array;
+module.exports.isUint32Array = isUint32Array;
+module.exports.isFloat32Array = isFloat32Array;
+module.exports.isFloat64Array = isFloat64Array;
+module.exports.isBigInt64Array = isBigInt64Array;
+module.exports.isBigUint64Array = isBigUint64Array;
